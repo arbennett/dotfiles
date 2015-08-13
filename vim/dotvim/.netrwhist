@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/bzq/livv-dev/LIVV/validation'
+let g:netrw_dirhist_2='/home/bzq/livv-dev/LIVV/validation/coverage'
+let g:netrw_dirhist_3='/home/bzq/livv-dev/LIVV/validation'
+let g:netrw_dirhist_4='/home/bzq/livv-dev/LIVV/validation/example'
+let g:netrw_dirhist_5='/home/bzq/livv-dev/LIVV/validation'
+let g:netrw_dirhist_6='/home/bzq/livv-dev/LIVV/validation/coverage'

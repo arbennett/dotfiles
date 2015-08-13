@@ -1,0 +1,23 @@
+# Change to dark configuration for the following interfaces:
+#  * terminator
+#  * vim (and gvim)
+#  * gtk
+#
+# Where the files are
+DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+# Warning to other users here:  This is not portable.  There doesn't seem to be a nice
+# way to check which desktop environment (if any) is running reliably.  This works for 
+# my machiens and I'm happy enough with it.
+if [ "$DESKTOP_SESSION" == "gnome" ]; then
+  gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
+elif [ "$DESKTOP_SESSION" == "xfce" ]; then
+  xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Darker"
+fi
+
+# Move all of the files to their respective places
+cp $DOTS/vim/vimrc.dark ~/.vimrc
+cp $DOTS/vim/gvimrc.dark ~/.gvimrc
+cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
+cp $DOTS/terminator/config.dark ~/.config/terminator/config
+

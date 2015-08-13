@@ -1,0 +1,5 @@
+" Set colors for gvim
+
+set background=light
+colorscheme PaperColor
+
