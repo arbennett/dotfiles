@@ -1,4 +1,6 @@
 [global_config]
+use_system_font=False
+font=Fira Mono 11
 [keybindings]
 [profiles]
   [[Monokai Soda]]

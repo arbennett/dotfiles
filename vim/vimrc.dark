@@ -31,7 +31,7 @@ set cmdheight=1                 "The commandbar height
 set showmatch                   "Show matching bracets when text indicator is over them
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set noswapfile                  " do not write annoying intermediate swap files,
-
+set guifont=Fira\ Mono\ 10
 
 " VIM airline config
 set laststatus=2                " Solves: statusline does not appear until I create a split
