@@ -10,6 +10,7 @@ Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on       "required!
