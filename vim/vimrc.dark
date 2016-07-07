@@ -10,6 +10,8 @@ Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
+Plugin 'JuliaLang/julia-vim'
+Plugin 'vim-scripts/Vim-R-Plugin'
 
 call vundle#end()
 filetype plugin indent on       "required!
@@ -57,6 +59,10 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_theme='luna'    " Self explanatory
 " End of airline configs
 
+set formatoptions+=w
+set tw=100
+
+command Format gggqG
 
 set t_Co=256
 set ttimeoutlen=50              "Solves: there is a pause when leaving insert mode

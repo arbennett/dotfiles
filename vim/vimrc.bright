@@ -10,6 +10,8 @@ Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
+Plugin 'JuliaLang/julia-vim'
+Plugin 'vimg-scripts/Vim-R-Plugin'
 
 call vundle#end()
 filetype plugin indent on       "required!
@@ -40,6 +42,13 @@ set laststatus=2                " Solves: statusline does not appear until I cre
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+set formatoptions+=w
+set tw=100
+
+command Format gggqG
+
+
 
 " unicode symbols
 let g:airline_left_sep = '»'
