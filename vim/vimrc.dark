@@ -12,6 +12,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'vim-scripts/Vim-R-Plugin'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on       "required!
