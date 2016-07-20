@@ -4,8 +4,8 @@
 #  * gtk
 #
 # Where the files are
-DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
+DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd 
+)
 # Warning to other users here:  This is not portable.  There doesn't seem to be a nice
 # way to check which desktop environment (if any) is running reliably.  This works for 
 # my machiens and I'm happy enough with it.

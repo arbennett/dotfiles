@@ -6,12 +6,12 @@ call vundle#begin()
 
 Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
 Plugin 'JuliaLang/julia-vim'
-Plugin 'vim-scripts/Vim-R-Plugin'
 Plugin 'scrooloose/syntastic'
 
 call vundle#end()
