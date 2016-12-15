@@ -7,7 +7,7 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
@@ -68,6 +68,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_theme='papercolor'    " Self explanatory
 " End of airline configs
 
+let g:syntastic_python_checkers = ['pyflakes']
 
 set t_Co=256
 set ttimeoutlen=50              "Solves: there is a pause when leaving insert mode
