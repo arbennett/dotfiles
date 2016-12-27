@@ -1,6 +1,4 @@
 [global_config]
-use_system_font=False
-font=Fira Mono 11
 [keybindings]
 [profiles]
   [[Monokai Soda]]
@@ -46,6 +44,7 @@ font=Fira Mono 11
     background_type = transparent
     background_image = None
     cursor_color = "#4d4d4c"
+    font = Fira Mono 11
     foreground_color = "#4d4d4c"
     show_titlebar = False
     background_color = "#f3f3f5"
