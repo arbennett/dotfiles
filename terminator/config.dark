@@ -17,14 +17,15 @@
     background_color = "#191c27"
   [[default]]
     palette = "#353535:#d25252:#a5c261:#ffc66d:#6c99bb:#d197d9:#bed6ff:#eeeeec:#535353:#f00c0c:#c2e075:#e1e48b:#8ab7d9:#efb5f7:#dcf4ff:#ffffff"
-    background_darkness = 0.88
+    background_darkness = 0.90
     background_type = transparent
     background_image = None
     cursor_color = "#d6d6d6"
-    foreground_color = "#ffffff"
+    foreground_color = "#f0f0f0"
     show_titlebar = False
     font = Fira Mono 11
-    background_color = "#2f343b"
+    use_system_font = False
+    background_color = "#1B1B1B"
   [[Material]]
     palette = "#212121:#b7141f:#457b24:#fc7b08:#134eb2:#560088:#0e717c:#efefef:#424242:#e83b3f:#7aba3a:#fd8e09:#54a4f3:#aa4dbc:#26bbd1:#d9d9d9"
     background_color = "#eaeaea"

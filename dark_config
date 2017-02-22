@@ -4,15 +4,15 @@
 #  * gtk
 #
 # Where the files are
-DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd 
-)
+DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+
 # Warning to other users here:  This is not portable.  There doesn't seem to be a nice
 # way to check which desktop environment (if any) is running reliably.  This works for 
 # my machiens and I'm happy enough with it.
-if [ "$DESKTOP_SESSION" == "gnome" ]; then
-  gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
+if [ "$DESKTOP_SESSION" == "gnome-xorg" ]; then
+  gsettings set org.gnome.desktop.interface gtk-theme "OSX-Arc-Darker"
 elif [ "$DESKTOP_SESSION" == "xfce" ]; then
-  xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Darker"
+  xfconf-query -c xsettings -p /Net/ThemeName -s "OSX-Arc-Darker"
 fi
 
 # Move all of the files to their respective places

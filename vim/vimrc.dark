@@ -1,9 +1,11 @@
 set nocompatible                "Use Vim settings, rather than Vi settings
 filetype off                    "required!
 
+"----------------------------------------------------------
+" Plugins
+"----------------------------------------------------------
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline-themes'
@@ -13,9 +15,13 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'scrooloose/syntastic'
-
 call vundle#end()
+
+"----------------------------------------------------------
+" General settings
+"----------------------------------------------------------
 filetype plugin indent on       "required!
+colorscheme onedark
 set backspace=indent,eol,start  "allow backspacing over everything in insert mode
 set history=50                  "keep 50 lines of command line history
 set encoding=utf-8              "allow for more symbols
@@ -35,36 +41,14 @@ set showmatch                   "Show matching bracets when text indicator is ov
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set noswapfile                  " do not write annoying intermediate swap files,
 set guifont=Fira\ Mono\ 10
+set relativenumber
+set cursorline
 
-" VIM airline config
-set laststatus=2                " Solves: statusline does not appear until I create a split
-"set noshowmode                  " Get rid of the default mode indicator 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-let g:syntastic_python_checkers = ['pyflakes']
-
-let g:airline_theme='luna'    " Self explanatory
-" End of airline configs
-
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi clear LineNr
 set formatoptions+=w
-set tw=100
-
+set tw=80
 command Format gggqG
 
 set t_Co=256
@@ -92,5 +76,94 @@ let g:mustache_abbreviations = 1
 "Root permission on a file inside VIM
 cmap w!! w !sudo tee >/dev/null %
 
+"----------------------------------------------------------
+" VIM airline config
+"----------------------------------------------------------
+set laststatus=2                " Solves: statusline does not appear until I create a split
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
+let g:syntastic_python_checkers = ['pyflakes']
+
+let g:airline_theme='luna'    " Self explanatory
+" End of airline configs
+
+"----------------------------------------------------------
+" Taken from vim-numbertoggle plugin
+"----------------------------------------------------------
+let g:loaded_numbertoggle = 1
+let g:insertmode = 0
+let g:focus = 1
+let g:relativemode = 1
+function! EnableRelativeNumbers()
+  set number
+  set relativenumber
+endfunc
+function! DisableRelativeNumbers()
+  set number
+  set norelativenumber
+endfunc
+function! UpdateMode()
+  if(&number == 0 && &relativenumber == 0)
+    return
+  end
+  if(g:focus == 0)
+    call DisableRelativeNumbers()
+  elseif(g:insertmode == 0 && g:relativemode == 1)
+    call EnableRelativeNumbers()
+  else
+    call DisableRelativeNumbers()
+  end
+  if !exists("&numberwidth") || &numberwidth <= 4
+    let &numberwidth = max([4, 1+len(line('$'))])
+  else
+    let &numberwidth = max([&numberwidth, 1+len(line('$'))])
+  endif
+endfunc
+function! FocusGained()
+  let g:focus = 1
+  call UpdateMode()
+endfunc
+function! FocusLost()
+  let g:focus = 0
+  call UpdateMode()
+endfunc
+function! InsertLeave()
+  let g:insertmode = 0
+  call UpdateMode()
+endfunc
+function! InsertEnter()
+  let g:insertmode = 1
+  call UpdateMode()
+endfunc
+
+" Automatically switch to absolute numbers when focus is lost and switch back
+" when the focus is regained.
+autocmd FocusLost * :call FocusLost()
+autocmd FocusGained * :call FocusGained()
+autocmd WinLeave * :call FocusLost()
+autocmd WinEnter * :call FocusGained()
+
+" Switch to absolute line numbers when the window loses focus and switch back
+" to relative line numbers when the focus is regained.
+autocmd WinLeave * :call FocusLost()
+autocmd WinEnter * :call FocusGained()
+
+" Switch to absolute line numbers when entering insert mode and switch back to
+" relative line numbers when switching back to normal mode.
+autocmd InsertEnter * :call InsertEnter()
+autocmd InsertLeave * :call InsertLeave()
 
