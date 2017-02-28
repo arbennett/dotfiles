@@ -7,15 +7,19 @@ filetype off                    "required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/vundle'
+Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'nvie/vim-flake8'
 Plugin 'JuliaLang/julia-vim'
-Plugin 'scrooloose/syntastic'
 call vundle#end()
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8'],
+\}
 
 "----------------------------------------------------------
 " General settings
