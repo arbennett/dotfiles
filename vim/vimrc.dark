@@ -45,6 +45,7 @@ set showmatch                   "Show matching bracets when text indicator is ov
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set noswapfile                  " do not write annoying intermediate swap files,
 set guifont=Fira\ Mono\ 10
+set mouse=a
 set relativenumber
 set cursorline
 
