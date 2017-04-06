@@ -10,8 +10,10 @@ alias godark='/opt/Color/dark_config'
 alias la='ls -la --color=auto'
 alias watchpdf='latexmk -pdf -pvc'
     
-tokindle () {
-    k2pdfopt $* -dev kpw -mode fw -wrap -hy -ws 0.375 -ls-
+reflow() {
+    DIR=$(basename $(pwd))
+    mkdir -p ~/Dropbox/reflow/$DIR
+    k2pdfopt $* -dpi 267 -w 1536 -h 2048 -wrap -hy -om 0.3 -o ~/Dropbox/reflow/$DIR/$* 
 }
 
 fixscreen() {
