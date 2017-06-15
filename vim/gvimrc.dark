@@ -1,6 +1,6 @@
 " Set colors for gvim
 
-colorscheme onedark
+colorscheme gruvbox
 
 
 let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'

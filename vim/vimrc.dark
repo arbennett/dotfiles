@@ -10,8 +10,9 @@ Plugin 'gmarik/vundle'
 Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'walm/jshint.vim' 
+Plugin 'morhetz/gruvbox'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'JuliaLang/julia-vim'
 call vundle#end()
@@ -25,7 +26,9 @@ let g:ale_linters = {
 " General settings
 "----------------------------------------------------------
 filetype plugin indent on       "required!
-colorscheme onedark
+colorscheme gruvbox
+set background=dark    " Setting dark mode
+let g:gruvbox_termcolors=256
 set backspace=indent,eol,start  "allow backspacing over everything in insert mode
 set history=50                  "keep 50 lines of command line history
 set encoding=utf-8              "allow for more symbols
@@ -44,10 +47,11 @@ set cmdheight=1                 "The commandbar height
 set showmatch                   "Show matching bracets when text indicator is over them
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set noswapfile                  " do not write annoying intermediate swap files,
-set guifont=Fira\ Mono\ 10
+set guifont=Iosevka\ 10
 set mouse=a
 set relativenumber
 set cursorline
+let g:syntastic_python_checkers = ['pyflakes']
 
 hi Normal ctermbg=none
 hi NonText ctermbg=none
@@ -85,25 +89,24 @@ cmap w!! w !sudo tee >/dev/null %
 " VIM airline config
 "----------------------------------------------------------
 set laststatus=2                " Solves: statusline does not appear until I create a split
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='gruvbox'    " Self explanatory
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
+  let g:airline_left_sep = '»'
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '«'
+  let g:airline_right_sep = '◀'
+  let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.paste = '∥'
+  let g:airline_symbols.whitespace = 'Ξ'
 endif
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-let g:syntastic_python_checkers = ['pyflakes']
-
-let g:airline_theme='luna'    " Self explanatory
 " End of airline configs
 
 "----------------------------------------------------------

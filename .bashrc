@@ -7,7 +7,7 @@ alias ls='ls --color=auto'
 alias color='/opt/Color/colorCorrection'
 alias gobright='/opt/Color/bright_config'
 alias godark='/opt/Color/dark_config'
-alias la='ls -la --color=auto'
+alias la='ls -la --color=auto --block-size=MB'
 alias watchpdf='latexmk -pdf -pvc'
     
 reflow() {
