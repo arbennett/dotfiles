@@ -13,30 +13,44 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'walm/jshint.vim' 
 Plugin 'morhetz/gruvbox'
+"Plugin 'edkolev/tmuxline.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'JuliaLang/julia-vim'
+Plugin 'vim-python/python-syntax'
+Plugin 'tpope/vim-commentary'
+Plugin 'luochen1990/rainbow'
+Plugin 'terryma/vim-multiple-cursors'
 call vundle#end()
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \}
-
 "----------------------------------------------------------
 " General settings
 "----------------------------------------------------------
+set termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set t_ZH=[3m
+    set t_ZR=[23m
+endif
 filetype plugin indent on       "required!
 colorscheme gruvbox
 set background=dark    " Setting dark mode
-let g:gruvbox_termcolors=256
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark = 'soft'
 set backspace=indent,eol,start  "allow backspacing over everything in insert mode
 set history=50                  "keep 50 lines of command line history
 set encoding=utf-8              "allow for more symbols
 set ruler                       "show the cursor position all the time
 set showcmd                     "display incomplete commands
 set incsearch                   "do incremental searching
-set nu                          "show line numbers
-set expandtab                   "use spaces instead of tabs
+set nu                          "show line numbers set expandtab                   "use spaces instead of tabs
 set tabstop=4                   "insert 4 spaces whenever the tab key is pressed
 set shiftwidth=4                "set indentation to 4 spaces
 set hlsearch                    "highlight search terms
@@ -52,12 +66,14 @@ set mouse=a
 set relativenumber
 set cursorline
 let g:syntastic_python_checkers = ['pyflakes']
+let g:python_highlight_all = 1
+let g:rainbow_active = 1
 
 hi Normal ctermbg=none
 hi NonText ctermbg=none
 hi clear LineNr
 set formatoptions+=w
-set tw=80
+set tw=120
 command Format gggqG
 
 set t_Co=256
@@ -92,22 +108,6 @@ set laststatus=2                " Solves: statusline does not appear until I cre
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'    " Self explanatory
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-  let g:airline_left_sep = '»'
-  let g:airline_left_sep = '▶'
-  let g:airline_right_sep = '«'
-  let g:airline_right_sep = '◀'
-  let g:airline_symbols.linenr = '␊'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-endif
-" End of airline configs
 
 "----------------------------------------------------------
 " Taken from vim-numbertoggle plugin
