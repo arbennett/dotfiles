@@ -6,29 +6,30 @@ filetype off                    "required!
 "----------------------------------------------------------
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/vundle'
-Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'walm/jshint.vim' 
-Plugin 'morhetz/gruvbox'
-"Plugin 'edkolev/tmuxline.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'JuliaLang/julia-vim'
-Plugin 'vim-python/python-syntax'
-Plugin 'tpope/vim-commentary'
-Plugin 'luochen1990/rainbow'
-Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'gmarik/vundle'
+    Plugin 'w0rp/ale'
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'walm/jshint.vim' 
+    Plugin 'morhetz/gruvbox'
+    Plugin 'mustache/vim-mustache-handlebars'
+    Plugin 'JuliaLang/julia-vim'
+    Plugin 'vim-python/python-syntax'
+    Plugin 'tpope/vim-commentary'
+	Plugin 'tpope/vim-fugitive'
+    Plugin 'luochen1990/rainbow'
+    Plugin 'terryma/vim-multiple-cursors'
+    " Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 
+" Syntax checkers
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \}
-"----------------------------------------------------------
-" General settings
-"----------------------------------------------------------
+
+" True color support
 set termguicolors
 if &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -36,58 +37,62 @@ if &term =~# '^screen'
     set t_ZH=[3m
     set t_ZR=[23m
 endif
-filetype plugin indent on       "required!
+
+"----------------------------------------------------------
+" General settings
+"----------------------------------------------------------
 colorscheme gruvbox
 set background=dark    " Setting dark mode
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark = 'soft'
-set backspace=indent,eol,start  "allow backspacing over everything in insert mode
-set history=50                  "keep 50 lines of command line history
-set encoding=utf-8              "allow for more symbols
-set ruler                       "show the cursor position all the time
-set showcmd                     "display incomplete commands
-set incsearch                   "do incremental searching
-set nu                          "show line numbers set expandtab                   "use spaces instead of tabs
-set tabstop=4                   "insert 4 spaces whenever the tab key is pressed
-set shiftwidth=4                "set indentation to 4 spaces
-set hlsearch                    "highlight search terms
-set ic                          "Ignore Case during searches
-set autoindent                  "start new line at the same indentation level
-syntax enable                   "syntax highlighting
-set cmdheight=1                 "The commandbar height
-set showmatch                   "Show matching bracets when text indicator is over them
+
+filetype plugin indent on       " required!
+syntax enable                   " syntax highlighting
+set nu                          " show line numbers set expandtab                   
+set ic                          " Ignore Case during searches
+set ruler                       " show the cursor position all the time
+set tw=120						" auto wrap at a certain point
+set mouse=a						" Use the mouse
+set showcmd                     " display incomplete commands
+set hlsearch                    " highlight search terms
 set nobackup                    " do not keep backup files, it's 70's style cluttering
+set incsearch                   " do incremental searching
+set showmatch                   " Show matching bracets when text indicator is over them
+set tabstop=4                   " insert 4 spaces whenever the tab key is pressed
+set cursorline					" show teh cursorline
+set history=50                  " keep 50 lines of command line history
+set shiftwidth=4                " set indentation to 4 spaces
+set relativenumber 				" initialize with relative numbers
+set encoding=utf-8              " allow for more symbols
+set ttimeoutlen=20              " Solves: there is a pause when leaving insert mode
+set formatoptions+=w 			" Don't cut words up when formatting (I think)
+set cmdheight=1                 " The commandbar height
+set splitbelow                  " Horizontal splits open below current file
+set splitright                  " Vertical splits open to the right of the current file
+set autoindent                  " start new line at the same indentation level
 set noswapfile                  " do not write annoying intermediate swap files,
-set guifont=Iosevka\ 10
-set mouse=a
-set relativenumber
-set cursorline
-let g:syntastic_python_checkers = ['pyflakes']
+set guifont=Iosevka\ 10			" I like this font
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash 
+hi clear LineNr
+
+" Set better python highlighting and colored parens/brackets/etc
 let g:python_highlight_all = 1
 let g:rainbow_active = 1
 
+" Eventually this will allow for transparent background
+" while true color is activated - not currently in vim
 hi Normal ctermbg=none
 hi NonText ctermbg=none
-hi clear LineNr
-set formatoptions+=w
-set tw=120
+
 command Format gggqG
 
-set t_Co=256
-set ttimeoutlen=50              "Solves: there is a pause when leaving insert mode
-set splitbelow                  " Horizontal splits open below current file
-set splitright                  " Vertical splits open to the right of the current file
-set wildmode=longest,list       " Pressing <Tab> shows command suggestions similar to pressing <Tab>
-                                " in bash 
 
 " Mappings to traverse buffer list 
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
 
 "Easy expansion of the active file directory
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
