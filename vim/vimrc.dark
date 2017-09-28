@@ -94,6 +94,9 @@ command Format gggqG
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
 "Easy expansion of the active file directory
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
