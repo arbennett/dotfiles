@@ -11,7 +11,7 @@ call vundle#begin()
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'vim-airline/vim-airline'
-    Plugin 'walm/jshint.vim' 
+    Plugin 'walm/jshint.vim'
     Plugin 'morhetz/gruvbox'
     Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'JuliaLang/julia-vim'
@@ -20,7 +20,7 @@ call vundle#begin()
 	Plugin 'tpope/vim-fugitive'
     Plugin 'luochen1990/rainbow'
     Plugin 'terryma/vim-multiple-cursors'
-    " Plugin 'edkolev/tmuxline.vim'
+    "Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 
 " Syntax checkers
@@ -48,14 +48,14 @@ endif
 "----------------------------------------------------------
 colorscheme gruvbox
 set background=dark    " Setting dark mode
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+"hi! Normal ctermbg=#FFFFFF guibg=#FFFFFF
+"hi! NonText ctermbg=NONE guibg=#FFFFFF
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
 
 filetype plugin indent on       " required!
 syntax enable                   " syntax highlighting
-set nu                          " show line numbers set expandtab                   
+set nu                          " show line numbers set expandtab
 set ic                          " Ignore Case during searches
 set ruler                       " show the cursor position all the time
 set tw=120						" auto wrap at a certain point
@@ -80,39 +80,52 @@ set autoindent                  " start new line at the same indentation level
 set noswapfile                  " do not write annoying intermediate swap files,
 set guifont=Iosevka\ 10			" I like this font
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash 
+set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash
+set scrolloff=8                 " scroll before reaching edge
+set noshowmode                  " self explanatory
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
 hi clear LineNr
+hi! Normal guibg=#232323
+command Format gggqG
 
 " Set better python highlighting and colored parens/brackets/etc
 let g:python_highlight_all = 1
 let g:rainbow_active = 1
 
-" Eventually this will allow for transparent background
-" while true color is activated - not currently in vim
-hi Normal ctermbg=none
-hi NonText ctermbg=none
+"Activate Moustache Abreviations
+let g:mustache_abbreviations = 1
 
-command Format gggqG
+"----------------------------------------------------------
+" Keybindings
+"----------------------------------------------------------
+mapclear
+let mapleader=' '
+" Managing splits more easily
+nnoremap <silent> <Leader>- : split<cr>
+nnoremap <silent> <Leader>/ : vsplit<cr>
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>h <C-W><C-H>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <silent> <Leader>J : res+3<cr>
+nnoremap <silent> <Leader>H :vertical resize+3<cr>
+nnoremap <silent> <Leader>bd : bd<cr>
+nnoremap <silent> <Leader>bn : bnext<cr>
+nnoremap <silent> <Leader>bp : bprevious<cr>
 
-
-" Mappings to traverse buffer list 
+" Mappings to traverse buffer list
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 
-" Remove trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
+"Root permission on a file inside VIM
+cmap w!! w !sudo tee >/dev/null %
 
 "Easy expansion of the active file directory
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 "Shortcut to Mute Highlighting
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
-"Activate Moustache Abreviations
-let g:mustache_abbreviations = 1
-
-"Root permission on a file inside VIM
-cmap w!! w !sudo tee >/dev/null %
 
 "----------------------------------------------------------
 " VIM airline config

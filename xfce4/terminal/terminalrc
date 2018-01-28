@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Iosevka Term 11
+FontName=Iosevka Term Light 10
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
@@ -24,12 +24,12 @@ MiscDefaultWorkingDir=
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
-BackgroundDarkness=0.950000
-RunCustomCommand=TRUE
-CustomCommand=tmux
+BackgroundDarkness=1.000000
 ColorForeground=#f2f2e5e5bcbc
-ColorBackground=#377735be34e0
+ColorBackground=#232323232323
 ColorCursor=#d65bc4cd8ca1
-ColorPalette=#323230302f2f;#cccc24241d1d;#989897971a1a;#d7d799992121;#454585858888;#b1b162628686;#68689d9d6a6a;#929283837474;#1d1d20202121;#fbfb49493434;#b8b8bbbb2626;#fafabdbd2f2f;#8383a5a59898;#d3d386869b9b;#8e8ec0c07c7c;#b9b9a6a69393
+ColorPalette=rgb(50,48,47);rgb(204,36,29);rgb(152,151,26);rgb(215,153,33);rgb(69,133,136);rgb(177,98,134);rgb(104,157,106);rgb(146,131,116);rgb(29,32,33);rgb(251,73,52);rgb(184,187,38);rgb(250,189,47);rgb(131,165,152);rgb(211,134,155);rgb(142,192,124);rgb(185,166,147)
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+TitleMode=TERMINAL_TITLE_REPLACE
 
