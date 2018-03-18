@@ -3,15 +3,15 @@
 #
 COLOR_00="#E7E8EB"
 set -g status-bg colour15
-set -g message-bg colour15
-set -g message-command-fg colour1
+set -g message-bg $COLOR_00
+set -g message-fg colour1
+set -g message-command-fg colour4
+set -g message-command-bg colour4
 set -g status-justify "left"
 set -g status-left-length "100"
 set -g status "on"
 set -g status-right-length "100"
 set -g status-right-attr "none"
-set -g message-fg colour15
-set -g message-command-bg colour8
 set -g status-attr "none"
 set -g pane-border-fg colour0
 set -g status-left-attr "none"
