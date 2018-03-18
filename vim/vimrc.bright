@@ -6,68 +6,125 @@ filetype off                    "required!
 "----------------------------------------------------------
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/vundle'
-Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'walm/jshint.vim' 
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'JuliaLang/julia-vim'
+    Plugin 'gmarik/vundle'
+    Plugin 'w0rp/ale'
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'walm/jshint.vim'
+    Plugin 'morhetz/gruvbox'
+	Plugin 'rakr/vim-one'
+	Plugin 'NLKNguyen/papercolor-theme'
+    Plugin 'mustache/vim-mustache-handlebars'
+    Plugin 'JuliaLang/julia-vim'
+    Plugin 'vim-python/python-syntax'
+    Plugin 'tpope/vim-commentary'
+	Plugin 'tpope/vim-fugitive'
+    Plugin 'luochen1990/rainbow'
+    Plugin 'terryma/vim-multiple-cursors'
+    "Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 
+" Syntax checkers
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \}
 
+" True color support
+set termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set t_ZH=[3m
+    set t_ZR=[23m
+elseif &term =~# '^tmux'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set t_ZH=[3m
+    set t_ZR=[23m
+endif
+
 "----------------------------------------------------------
 " General settings
 "----------------------------------------------------------
-filetype plugin indent on       "required!
+"colorscheme gruvbox
+"set background=dark    " Setting dark mode
 colorscheme PaperColor
-set backspace=indent,eol,start  "allow backspacing over everything in insert mode
-set history=50                  "keep 50 lines of command line history
-set encoding=utf-8              "allow for more symbols
-set ruler                       "show the cursor position all the time
-set showcmd                     "display incomplete commands
-set incsearch                   "do incremental searching
-set nu                          "show line numbers
-set expandtab                   "use spaces instead of tabs
-set tabstop=4                   "insert 4 spaces whenever the tab key is pressed
-set shiftwidth=4                "set indentation to 4 spaces
-set hlsearch                    "highlight search terms
-set ic                          "Ignore Case during searches
-set autoindent                  "start new line at the same indentation level
-syntax enable                   "syntax highlighting
-set cmdheight=1                 "The commandbar height
-set showmatch                   "Show matching bracets when text indicator is over them
+set background=light   " Setting light mode
+"hi! Normal ctermbg=#FFFFFF guibg=#FFFFFF
+"hi! NonText ctermbg=NONE guibg=#FFFFFF
+let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+
+filetype plugin indent on       " required!
+syntax enable                   " syntax highlighting
+set nu                          " show line numbers set expandtab
+set ic                          " Ignore Case during searches
+set ruler                       " show the cursor position all the time
+set tw=120						" auto wrap at a certain point
+set mouse=a						" Use the mouse
+set showcmd                     " display incomplete commands
+set hlsearch                    " highlight search terms
 set nobackup                    " do not keep backup files, it's 70's style cluttering
-set noswapfile                  " do not write annoying intermediate swap files,
-set guifont=Fira\ Mono\ 10
-set mouse=a
-set relativenumber
-set cursorline
-
-hi Normal ctermbg=none
-hi NonText ctermbg=none
-hi clear LineNr
-set formatoptions+=w
-set tw=80
-command Format gggqG
-
-set t_Co=256
-set ttimeoutlen=50              "Solves: there is a pause when leaving insert mode
+set incsearch                   " do incremental searching
+set showmatch                   " Show matching bracets when text indicator is over them
+set tabstop=4                   " insert 4 spaces whenever the tab key is pressed
+set cursorline					" show teh cursorline
+set history=50                  " keep 50 lines of command line history
+set shiftwidth=4                " set indentation to 4 spaces
+set relativenumber 				" initialize with relative numbers
+set encoding=utf-8              " allow for more symbols
+set ttimeoutlen=20              " Solves: there is a pause when leaving insert mode
+set formatoptions+=w 			" Don't cut words up when formatting (I think)
+set cmdheight=1                 " The commandbar height
 set splitbelow                  " Horizontal splits open below current file
 set splitright                  " Vertical splits open to the right of the current file
-set wildmode=longest,list       " Pressing <Tab> shows command suggestions similar to pressing <Tab>
-                                " in bash 
+set autoindent                  " start new line at the same indentation level
+set noswapfile                  " do not write annoying intermediate swap files,
+set guifont=Iosevka\ 10			" I like this font
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash
+set scrolloff=8                 " scroll before reaching edge
+set noshowmode                  " self explanatory
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+hi clear LineNr
+"hi! Normal guibg=#232323
+hi! Normal guibg=#E7E8EB
+command Format gggqG
 
-" Mappings to traverse buffer list 
+" Set better python highlighting and colored parens/brackets/etc
+let g:python_highlight_all = 1
+let g:rainbow_active = 1
+
+"Activate Moustache Abreviations
+let g:mustache_abbreviations = 1
+
+"----------------------------------------------------------
+" Keybindings
+"----------------------------------------------------------
+mapclear
+let mapleader=' '
+" Managing splits more easily
+nnoremap <silent> <Leader>- : split<cr>
+nnoremap <silent> <Leader>/ : vsplit<cr>
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>h <C-W><C-H>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <silent> <Leader>J : res+3<cr>
+nnoremap <silent> <Leader>H :vertical resize+3<cr>
+nnoremap <silent> <Leader>bd : bd<cr>
+nnoremap <silent> <Leader>bn : bnext<cr>
+nnoremap <silent> <Leader>bp : bprevious<cr>
+
+" Mappings to traverse buffer list
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
+
+"Root permission on a file inside VIM
+cmap w!! w !sudo tee >/dev/null %
 
 "Easy expansion of the active file directory
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -75,36 +132,14 @@ cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 "Shortcut to Mute Highlighting
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-"Activate Moustache Abreviations
-let g:mustache_abbreviations = 1
-
-"Root permission on a file inside VIM
-cmap w!! w !sudo tee >/dev/null %
-
 "----------------------------------------------------------
 " VIM airline config
 "----------------------------------------------------------
 set laststatus=2                " Solves: statusline does not appear until I create a split
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-let g:syntastic_python_checkers = ['pyflakes']
-
-let g:airline_theme='luna'    " Self explanatory
-" End of airline configs
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+"let g:airline_theme='one'    " Self explanatory
+let g:airline_theme='one'    " Self explanatory
 
 "----------------------------------------------------------
 " Taken from vim-numbertoggle plugin
