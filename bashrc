@@ -24,7 +24,7 @@ fixscreen() {
 
 
 PS1='[\u@\h \W]\$ '
-PS1='\[\e[33m\]\W ❱\[\e[32m\]❱\[\e[31m\]❱ \[\e(B\e[m\]'
+PS1='\[\e[31m\]\W ❱\[\e[32m\]❱\[\e[33m\]❱ \[\e(B\e[m\]'
 export EDITOR="vim"
 export TERM=screen-256color
 export PATH="$HOME/.local/bin:$PATH:/opt/visit/bin:$HOME/.gem/ruby/2.4.0/bin:/opt/ncl/bin"

@@ -12,15 +12,20 @@ DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # my machines and I'm happy enough with it.
 if [ "$DESKTOP_SESSION" == "gnome-xorg" ]; then
   gsettings set org.gnome.desktop.interface gtk-theme "OSX-Arc-White"
+  gsettings reset org.gnome.shell.extensions.user-theme "OSX-Arc-White"
+elif [ "$DESKTOP_SESSION" == "gnome" ]; then
+  gsettings set org.gnome.desktop.interface gtk-theme "OSX-Arc-White"
+  gsettings reset org.gnome.shell.extensions.user-theme "OSX-Arc-White"
 elif [ "$DESKTOP_SESSION" == "xfce" ]; then
   xfconf-query -c xsettings -p /Net/ThemeName -s "OSX-Arc-White"
 fi
 
 # Move all of the files into their respective places
+cp $DOTS/bashrc ~/.bashrc
 cp $DOTS/vim/vimrc.bright ~/.vimrc
 cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
 cp $DOTS/xfce4/terminal/terminalrc_papercolor ~/.config/xfce4/terminal/terminalrc
 cp $DOTS/tmux.conf ~/.tmux.conf
-cp $DOTS/tmuxline_universal ~/.tmuxline
-sp $DOTS/spacemacs ~/.spacemacs
+cp $DOTS/tmuxline_papercolor ~/.tmuxline
+cp $DOTS/spacemacs ~/.spacemacs
 
