@@ -85,6 +85,8 @@ set noswapfile                  " do not write annoying intermediate swap files,
 set guifont=Iosevka\ 10			" I like this font
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash
+set wildmenu                    " show menu for tab completion
+set path+=**                    " basic fuzzy file finding
 set scrolloff=8                 " scroll before reaching edge
 set noshowmode                  " self explanatory
 " Remove trailing whitespace on save
@@ -100,6 +102,12 @@ let g:rainbow_active = 1
 
 "Activate Moustache Abreviations
 let g:mustache_abbreviations = 1
+
+"----------------------------------------------------------
+" netrw configuration
+"----------------------------------------------------------
+let g:netrw_banner=0
+let g:netrw_liststyle=3
 
 "----------------------------------------------------------
 " Keybindings
