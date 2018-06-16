@@ -5,6 +5,7 @@
 set -o vi
 
 alias ls='ls --color=auto'
+alias vim='nvim'
 alias color='/opt/Color/colorCorrection'
 alias gobright='/opt/Color/bright_config'
 alias godark='/opt/Color/dark_config'

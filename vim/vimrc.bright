@@ -8,11 +8,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'gmarik/vundle'
     Plugin 'w0rp/ale'
-    Plugin 'Valloric/YouCompleteMe'
+    "Plugin 'Valloric/YouCompleteMe'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'vim-airline/vim-airline'
     Plugin 'walm/jshint.vim'
     Plugin 'morhetz/gruvbox'
+    Plugin 'romainl/Apprentice'
 	Plugin 'rakr/vim-one'
 	Plugin 'NLKNguyen/papercolor-theme'
     Plugin 'mustache/vim-mustache-handlebars'
@@ -21,8 +22,13 @@ call vundle#begin()
     Plugin 'tpope/vim-commentary'
 	Plugin 'tpope/vim-fugitive'
     Plugin 'luochen1990/rainbow'
-    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'jeffkreeftmeijer/vim-numbertoggle'
     "Plugin 'edkolev/tmuxline.vim'
+    Plugin 'Shougo/deoplete.nvim'
+    Plugin 'zchee/deoplete-jedi'
+    "Plugin 'roxma/nvim-yarp'
+    "Plugin 'roxma/vim-hug-neovim-rpc'
+    "Plugin 'terryma/vim-multiple-cursors'
 call vundle#end()
 
 " Syntax checkers
@@ -32,17 +38,19 @@ let g:ale_linters = {
 \}
 
 " True color support
-set termguicolors
-if &term =~# '^screen'
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set t_ZH=[3m
-    set t_ZR=[23m
-elseif &term =~# '^tmux'
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set t_ZH=[3m
-    set t_ZR=[23m
+if has('termguicolors')
+    set termguicolors
+    if &term =~# '^screen'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        set t_ZH=[3m
+        set t_ZR=[23m
+    elseif &term =~# '^tmux'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        set t_ZH=[3m
+        set t_ZR=[23m
+    endif
 endif
 
 "----------------------------------------------------------
@@ -134,12 +142,6 @@ nnoremap <silent> ]b :bnext<CR>
 "Root permission on a file inside VIM
 cmap w!! w !sudo tee >/dev/null %
 
-"Easy expansion of the active file directory
-cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-"Shortcut to Mute Highlighting
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
 "----------------------------------------------------------
 " VIM airline config
 "----------------------------------------------------------
@@ -148,70 +150,4 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='one'    " Self explanatory
 let g:airline_theme='one'    " Self explanatory
-
-"----------------------------------------------------------
-" Taken from vim-numbertoggle plugin
-"----------------------------------------------------------
-let g:loaded_numbertoggle = 1
-let g:insertmode = 0
-let g:focus = 1
-let g:relativemode = 1
-function! EnableRelativeNumbers()
-  set number
-  set relativenumber
-endfunc
-function! DisableRelativeNumbers()
-  set number
-  set norelativenumber
-endfunc
-function! UpdateMode()
-  if(&number == 0 && &relativenumber == 0)
-    return
-  end
-  if(g:focus == 0)
-    call DisableRelativeNumbers()
-  elseif(g:insertmode == 0 && g:relativemode == 1)
-    call EnableRelativeNumbers()
-  else
-    call DisableRelativeNumbers()
-  end
-  if !exists("&numberwidth") || &numberwidth <= 4
-    let &numberwidth = max([4, 1+len(line('$'))])
-  else
-    let &numberwidth = max([&numberwidth, 1+len(line('$'))])
-  endif
-endfunc
-function! FocusGained()
-  let g:focus = 1
-  call UpdateMode()
-endfunc
-function! FocusLost()
-  let g:focus = 0
-  call UpdateMode()
-endfunc
-function! InsertLeave()
-  let g:insertmode = 0
-  call UpdateMode()
-endfunc
-function! InsertEnter()
-  let g:insertmode = 1
-  call UpdateMode()
-endfunc
-
-" Automatically switch to absolute numbers when focus is lost and switch back
-" when the focus is regained.
-autocmd FocusLost * :call FocusLost()
-autocmd FocusGained * :call FocusGained()
-autocmd WinLeave * :call FocusLost()
-autocmd WinEnter * :call FocusGained()
-
-" Switch to absolute line numbers when the window loses focus and switch back
-" to relative line numbers when the focus is regained.
-autocmd WinLeave * :call FocusLost()
-autocmd WinEnter * :call FocusGained()
-
-" Switch to absolute line numbers when entering insert mode and switch back to
-" relative line numbers when switching back to normal mode.
-autocmd InsertEnter * :call InsertEnter()
-autocmd InsertLeave * :call InsertLeave()
 

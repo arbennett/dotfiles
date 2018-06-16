@@ -27,5 +27,6 @@ cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
 cp $DOTS/xfce4/terminal/terminalrc_papercolor ~/.config/xfce4/terminal/terminalrc
 cp $DOTS/tmux.conf ~/.tmux.conf
 cp $DOTS/tmuxline_papercolor ~/.tmuxline
+cp -r $DOTS/nvim ~/.config/
 cp $DOTS/spacemacs ~/.spacemacs
 cp $DOTS/inputrc ~/.inputrc
