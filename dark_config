@@ -1,26 +1,36 @@
 # Change to dark configuration for the following interfaces:
-#  * terminator
-#  * vim (and gvim)
+#  * xfce4-terminal
+#  * tmux
+#  * vim
 #  * gtk
 #
 # Where the files are
-DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+DOTS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Warning to other users here:  This is not portable.  There doesn't seem to be a nice
 # way to check which desktop environment (if any) is running reliably.  This works for
-# my machiens and I'm happy enough with it.
+# my machines and I'm happy enough with it.
 if [ "$DESKTOP_SESSION" == "gnome-xorg" ]; then
+: gsettings set org.gnome.desktop.interface gtk-theme "Arc-Grey-Darker"
+  gsettings reset org.gnome.shell.extensions.user-theme "Arc-Grey-Darker"
+elif [ "$DESKTOP_SESSION" == "gnome" ]; then
   gsettings set org.gnome.desktop.interface gtk-theme "Arc-Grey-Darker"
+  gsettings reset org.gnome.shell.extensions.user-theme "Arc-Grey-Darker"
 elif [ "$DESKTOP_SESSION" == "xfce" ]; then
   xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Grey-Darker"
 fi
 
 # Move all of the files into their respective places
-cp $DOTS/vim/vimrc.dark ~/.vimrc
-cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
-cp $DOTS/xfce4/terminal/terminalrc_gruvbox ~/.config/xfce4/terminal/terminalrc
-cp -r $DOTS/nvim ~/.config/
-cp $DOTS/tmux.conf ~/.tmux.conf
-cp $DOTS/tmuxline_gruvbox ~/.tmuxline
-cp $DOTS/spacemacs ~/.spacemacs
+mkdir -p ~/.config
 
+cp $DOTS/bashrc ~/.bashrc
+cp $DOTS/vim/vimrc ~/.vimrc
+cp $DOTS/tmux.conf ~/.tmux.conf
+cp $DOTS/tmuxline ~/.tmuxline
+cp $DOTS/spacemacs ~/.spacemacs
+cp $DOTS/inputrc ~/.inputrc
+
+cp -r $DOTS/nvim ~/.config/
+cp -r $DOTS/base16-shell ~/.config/
+
+source ~/.bashrc && base16_gruvbox-dark-medium

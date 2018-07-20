@@ -21,12 +21,18 @@ elif [ "$DESKTOP_SESSION" == "xfce" ]; then
 fi
 
 # Move all of the files into their respective places
+mkdir -p ~/.config
+mkdir -p ~/.vim
+
 cp $DOTS/bashrc ~/.bashrc
-cp $DOTS/vim/vimrc.bright ~/.vimrc
-cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
-cp $DOTS/xfce4/terminal/terminalrc_papercolor ~/.config/xfce4/terminal/terminalrc
+cp $DOTS/vim/vimrc ~/.vimrc
 cp $DOTS/tmux.conf ~/.tmux.conf
-cp $DOTS/tmuxline_papercolor ~/.tmuxline
-cp -r $DOTS/nvim ~/.config/
+cp $DOTS/tmuxline ~/.tmuxline
 cp $DOTS/spacemacs ~/.spacemacs
 cp $DOTS/inputrc ~/.inputrc
+
+cp -r $DOTS/nvim ~/.config/
+cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
+cp -r $DOTS/base16-shell ~/.config/
+
+source ~/.bashrc && base16_atelier-plateau-light
