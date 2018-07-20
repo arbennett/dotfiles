@@ -35,3 +35,18 @@ export PERL_LOCAL_LIB_ROOT="/home/bzq/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_
 export PERL_MB_OPT="--install_base \"/home/bzq/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/bzq/perl5"
 
+# --------------------------
+# Machine specific rc files
+# --------------------------
+if [ -f "$HOME/.hyakrc" ]; then
+	source $HOME/.hyakrc
+fi
+
+if [ -f "$HOME/.h2orc" ]; then
+	source $HOME/.h2orc
+fi
+
+if [ -f "$HOME/.cheyennerc" ]; then
+	source $HOME/.cheyennerc
+fi
+
