@@ -50,3 +50,4 @@ if [ -f "$HOME/.cheyennerc" ]; then
 	source $HOME/.cheyennerc
 fi
 
+echo $BASE16_THEME > ~/.config/base16-shell/current_theme

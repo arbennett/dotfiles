@@ -25,7 +25,12 @@ _base16()
   if [ -n ${BASE16_SHELL_HOOKS:+s} ] && [ -d "${BASE16_SHELL_HOOKS}" ]; then
     for hook in $BASE16_SHELL_HOOKS/*; do
       [ -f "$hook" ] && [ -x "$hook" ] && "$hook"
-    done
+  done
+  fi
+  if [ -f $HOME/.config/base16-i3/colors/base16-$theme.config ]; then
+    cat $HOME/.config/base16-i3/colors/base16-$theme.config \
+        $HOME/.config/i3/config.bak > $HOME/.config/i3/config
+    i3-msg reload
   fi
 }
 FUNC
@@ -36,3 +41,4 @@ for script in $script_dir/scripts/base16*.sh; do
   func_name="base16_${theme}"
   echo "alias $func_name=\"_base16 \\\"$script\\\" $theme\""
 done;
+

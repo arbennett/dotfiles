@@ -34,5 +34,8 @@ cp $DOTS/inputrc ~/.inputrc
 cp -r $DOTS/nvim ~/.config/
 cp -r $DOTS/vim/dotvim/colors/* ~/.vim/colors
 cp -r $DOTS/base16-shell ~/.config/
+cp -r $DOTS/i3 ~/.config
+cp -r $DOTS/xfce4 ~/.config
+cp -r $DOTS/autostart ~/.config
 
 source ~/.bashrc && base16_atelier-plateau-light

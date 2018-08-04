@@ -31,7 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     javascript
+     ;;javascript
      html
      markdown
      python
@@ -45,7 +45,7 @@ values."
           org-enable-reveal-js-support t)
      syntax-checking
      ;;themes-megapack
-     spacemacs-layouts
+     ;;spacemacs-layouts
      (colors :variables colors-enable-nyan-cat-progress-bar t)
      )
    ;; List of additional packages that will be installed without being
@@ -53,8 +53,9 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                      majapahit-theme
-                                      gruvbox-theme)
+                                        base16-theme)
+   ;;                                   majapahit-theme
+   ;;                                   gruvbox-theme)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -113,14 +114,14 @@ values."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
 
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((projects . 5))
+   dotspacemacs-startup-lists '((recents . 5))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -129,10 +130,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
-                         gruvbox-dark-medium
-                         majapahit-light
-                         )
+   ;;dotspacemacs-themes '(
+   ;;                      gruvbox-dark-medium
+   ;;                      majapahit-light
+   ;;                      )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -232,7 +233,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -316,6 +317,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; org-mode configuration
+  (defvar base16-theme-256-color-source 'base16-shell)
+  (add-hook 'after-init-hook (lambda () (load-theme (string-trim (f-read-text "~/.config/base16-shell/current_theme")) t)))
+  (setq base16-distinct-fringe-backgeround nil)
+  (setq base16-highlight-mode-line 'contrast)
   (setq org-directory "~/org-mode")
   (setq org-mobile-inbox-for-pull (concat org-directory "/flagged.org"))
   (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
@@ -329,8 +334,10 @@ you should place your code here."
                             `(org-level-8 ((t (,@headline ,@variable-tuple))))
                             `(org-level-7 ((t (,@headline ,@variable-tuple))))
                             `(org-level-6 ((t (,@headline ,@variable-tuple))))
-                            `(org-level-5 ((t (,@headline ,@variable-tuple))))
-                            `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.6))))
+                            `(org-level-5 ((t (,@headline ,@variable-tuple :height 1.2))))
+                            `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.4))))
+                            `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.6))))
+                            `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.8))))
                             `(org-level-1 ((t (,@headline ,@variable-tuple :height 2.0))))))
   (defun update-latex-scale ()
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.6))
