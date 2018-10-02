@@ -22,6 +22,7 @@ fi
 
 # Move all of the files into their respective places
 mkdir -p ~/.config
+mkdir -p ~/.scripts
 
 cp $DOTS/bashrc ~/.bashrc
 cp $DOTS/vim/vimrc ~/.vimrc
@@ -30,7 +31,10 @@ cp $DOTS/tmuxline ~/.tmuxline
 cp $DOTS/spacemacs ~/.spacemacs
 cp $DOTS/inputrc ~/.inputrc
 
+cp -r $DOTS/scripts/* ~/.scripts/
+cp -r $DOTS/i3 ~/.config/
+cp -r $DOTS/polybar ~/.config/
 cp -r $DOTS/nvim ~/.config/
 cp -r $DOTS/base16-shell ~/.config/
 
-source ~/.bashrc && base16_gruvbox-dark-medium
+source ~/.bashrc

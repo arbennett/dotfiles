@@ -28,9 +28,9 @@ smart_gaps on
 smart_borders on
 
 # class                 border     backgr.    text       indicator   child_border
-client.focused          $base0B    $base0B    $base04    $base0B     $base0B
-client.focused_inactive $base07    $base07    $base04    $base07     $base07
-client.unfocused        $base02    $base02    $base03    $base02     $base02
+client.focused          $base01    $base0B    $base04    $base0B     $base03
+client.focused_inactive $base07    $base07    $base04    $base07     $base03
+client.unfocused        $base03    $base02    $base03    $base02     $base07
 client.urgent           $base0C    $base0C    $base04    $base0C     $base0C
 client.placeholder      #000000    #0c0c0c    #ffffff    #000000     #0c0c0c
 
@@ -150,3 +150,19 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+# Toggle Gaps
+set $toggle_gaps Toggle gaps: (1)OFF (2)LOW (3)NORMAL (4)HUGE
+bindsym $mod+Shift+g mode "$toggle_gaps"
+mode "$toggle_gaps" {
+    bindsym 1 mode "default", gaps inner all set 0, gaps outer all set 0
+    bindsym 2 mode "default", gaps inner all set 10, gaps outer all set 0
+    bindsym 3 mode "default", gaps inner all set 15, gaps outer all set 10
+    bindsym 4 mode "default", gaps inner all set 30, gaps outer all set 20
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#exec_always --no-startup-id $HOME/.scripts/launch_polybar.sh

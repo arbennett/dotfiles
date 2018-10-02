@@ -15,6 +15,14 @@ reflow() {
     k2pdfopt $* -dpi 267 -w 1536 -h 2048 -wrap -hy -om 0.3 -o ~/Dropbox/reflow/$DIR/$*
 }
 
+launch_polybar() {
+	killall -q polybar
+	while pgrep -x polybar >/dev/null; do sleep 1; done
+	for i in $(polybar -m | awk -F: '{print $1}'); do
+		MONITOR=$i polybar example -c ~/.config/polybar/config &
+	done
+}
+
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
@@ -27,8 +35,8 @@ export NCARG_ROOT="/opt/ncl"
 export PETSC_DIR="/opt/petsc"
 export PETSC_ARCH="linux-c-opt"
 
-export PATH="$HOME/.local/bin:$PATH:/opt/visit/bin:$HOME/.gem/ruby/2.4.0/bin:/opt/ncl/bin"
-export PATH="/home/bzq/perl5/bin${PATH:+:${PATH}}"
+export PATH="$HOME/.local/bin:$PATH:$HOME/.gem/ruby/2.4.0/bin"
+export PATH="$HOME/.scripts:$HOME/perl5/bin${PATH:+:${PATH}}"
 
 export PERL5LIB="/home/bzq/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="/home/bzq/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
