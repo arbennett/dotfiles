@@ -1,0 +1,6 @@
+Command=/home/bzq/.scripts/mempercent.sh
+UseLabel=0
+Text=(genmon)
+UpdatePeriod=10000
+Font=Cantarell 11
+

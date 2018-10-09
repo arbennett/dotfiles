@@ -1,5 +1,5 @@
 favorites=exo-terminal-emulator.desktop,exo-file-manager.desktop,exo-mail-reader.desktop,exo-web-browser.desktop
-recent=xfce-settings-manager.desktop,xfce4-settings-editor.desktop,emacs.desktop,gnome-system-monitor.desktop,org.gnome.Nautilus.desktop,exo-file-manager.desktop,nitrogen.desktop,xfce-ui-settings.desktop,gimp.desktop,slack.desktop
+recent=exo-terminal-emulator.desktop,slack.desktop,spotify.desktop,org.gnome.Calendar.desktop,exo-file-manager.desktop,firefox.desktop,syncthing-gtk.desktop,emacs.desktop,nm-connection-editor.desktop,org.gnome.gedit.desktop
 button-title=\ \ \ 
 button-icon=distributor-logo-archlinux
 button-single-row=false
