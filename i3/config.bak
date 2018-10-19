@@ -1,17 +1,23 @@
 # i3 config file (v4)
 
-gaps inner 8
-for_window [class=".*"] border pixel 8
+gaps inner 6
+#for_window [class=".*"] border pixel 6
+for_window [class="^.*"] border pixel 4
+smart_gaps on
+smart_borders on
+
 # class                 border     backgr.    text       indicator   child_border
-client.focused          $base0B    $base0B    $base04    $base0B     $base0B
-client.focused_inactive $base07    $base07    $base04    $base07     $base07
-client.unfocused        $base02    $base02    $base03    $base02     $base02
+client.focused          $base01    $base0B    $base04    $base0B     $base08
+client.focused_inactive $base07    $base07    $base04    $base07     $base03
+client.unfocused        $base03    $base02    $base03    $base02     $base03
 client.urgent           $base0C    $base0C    $base04    $base0C     $base0C
 client.placeholder      #000000    #0c0c0c    #ffffff    #000000     #0c0c0c
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 set $mod Mod4
 floating_modifier $mod
+focus_follows_mouse no
+mouse_warping none
 
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
@@ -43,7 +49,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+h move rleft
+bindsym $mod+Shift+h move left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -78,28 +84,53 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# rename workspaces
-set $ws1 " 1:  "
-set $ws2 " 2:  "
-set $ws3 " 3:  "
-set $ws4 " 4:  "
-set $ws5 " 5:  "
-set $ws6 " 6:  "
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+## rename workspaces
+#set $ws1 " 1: "
+#set $ws2 " 2: "
+#set $ws3 " 3: "
+#set $ws4 " 4: "
+#set $ws5 " 5: "
+#set $ws6 " 6: "
+#
+#bindsym $mod+1 workspace $ws1
+#bindsym $mod+2 workspace $ws2
+#bindsym $mod+3 workspace $ws3
+#bindsym $mod+4 workspace $ws4
+#bindsym $mod+5 workspace $ws5
+#bindsym $mod+6 workspace $ws6
+#
+#bindsym $mod+Shift+1 move container to workspace $ws1
+#bindsym $mod+Shift+2 move container to workspace $ws2
+#bindsym $mod+Shift+3 move container to workspace $ws3
+#bindsym $mod+Shift+4 move container to workspace $ws4
+#bindsym $mod+Shift+5 move container to workspace $ws5
+#bindsym $mod+Shift+6 move container to workspace $ws6
+#bindsym $mod+Shift+7 move container to workspace $ws7
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -123,3 +154,19 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+# Toggle Gaps
+set $toggle_gaps Toggle gaps: (1)OFF (2)LOW (3)NORMAL (4)HUGE
+bindsym $mod+Shift+g mode "$toggle_gaps"
+mode "$toggle_gaps" {
+    bindsym 1 mode "default", gaps inner all set 0, gaps outer all set 0
+    bindsym 2 mode "default", gaps inner all set 10, gaps outer all set 0
+    bindsym 3 mode "default", gaps inner all set 15, gaps outer all set 10
+    bindsym 4 mode "default", gaps inner all set 30, gaps outer all set 20
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
