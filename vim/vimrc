@@ -19,6 +19,8 @@ call vundle#begin()
     Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'JuliaLang/julia-vim'
     Plugin 'vim-python/python-syntax'
+    Plugin 'python-mode/python-mode'
+    Plugin 'numirias/semshi'
     Plugin 'tpope/vim-commentary'
 	Plugin 'tpope/vim-fugitive'
     Plugin 'luochen1990/rainbow'
@@ -37,22 +39,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \}
-
-" True color support
-"if has('termguicolors')
-"    set termguicolors
-"    if &term =~# '^screen'
-"        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"        set t_ZH=[3m
-"        set t_ZR=[23m
-"    elseif &term =~# '^tmux'
-"        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"        set t_ZH=[3m
-"        set t_ZR=[23m
-"    endif
-"endif
+let g:ale_lint_delay = 500
 
 "----------------------------------------------------------
 " General settings
@@ -88,6 +75,7 @@ set tabstop=4                   " insert 4 spaces whenever the tab key is presse
 set cursorline					" show teh cursorline
 set history=50                  " keep 50 lines of command line history
 set shiftwidth=4                " set indentation to 4 spaces
+set expandtab                   " insert spaces when tab key is pressed
 set relativenumber 				" initialize with relative numbers
 set encoding=utf-8              " allow for more symbols
 set ttimeoutlen=20              " Solves: there is a pause when leaving insert mode
@@ -104,15 +92,15 @@ set wildmenu                    " show menu for tab completion
 set path+=**                    " basic fuzzy file finding
 set scrolloff=8                 " scroll before reaching edge
 set noshowmode                  " self explanatory
+set foldmethod=indent
+set foldlevel=20
+set lazyredraw
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 hi clear LineNr
 "hi! Normal guibg=#232323
 hi! Normal guibg=#E7E8EB
 command Format gggqG
-
-" Set better python highlighting and colored parens/brackets/etc
-let g:python_highlight_all = 1
 let g:rainbow_active = 1
 
 "Activate Moustache Abreviations
@@ -156,5 +144,27 @@ set laststatus=2                " Solves: statusline does not appear until I cre
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='one'    " Self explanatory
-let g:airline_theme='one'    " Self explanatory
+"let g:airline_theme='one'    " Self explanatory
 
+
+"----------------------------------------------------------
+" semshi coloring
+"----------------------------------------------------------
+function MyCustomHighlights()
+    hi semshiAttribute       ctermfg=4
+    hi semshiParameter       ctermfg=7
+    hi semshiParameterUnused ctermfg=7  cterm=underline
+    hi semshiBuiltin         ctermfg=14  cterm=bold
+    hi semshiLocal           ctermfg=4
+    hi semshiGlobal          ctermfg=3
+    hi semshiImported        ctermfg=4  cterm=bold
+    hi semshiFree            ctermfg=17
+    hi semshiUnresolved      ctermfg=0 ctermbg=4  cterm=underline
+    hi semshiSelected        ctermfg=8  ctermbg=12
+
+    hi semshiSelf            ctermfg=15
+
+    hi semshiErrorSign       ctermfg=231 ctermbg=160
+    hi semshiErrorChar       ctermfg=231 ctermbg=160
+endfunction
+autocmd FileType python call MyCustomHighlights()
