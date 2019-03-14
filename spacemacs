@@ -133,7 +133,6 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         gruvbox-dark-medium
                          solarized-dark
                          solarized-light
                          )
@@ -356,12 +355,23 @@ you should place your code here."
                               (interactive)
                               (message "Olivetti text-mode-hook")
                               (olivetti-mode 1)
-                              (olivetti-set-width 121)
+                              (olivetti-set-width 91)
                               ;;(hidden-mode-line-mode)
                               (org-bullets-mode)
                               (spacemacs/toggle-vi-tilde-fringe-off)
                               (spacemacs/toogle-line-numbers-off)
                               ))
+  (add-hook 'tex-mode-hook (lambda ()
+                             (interactive)
+                             (message "Olivetti text-mode-hook")
+                             (olivetti-mode 1)
+                             (olivetti-set-width 91)
+                             ;;(hidden-mode-line-mode)
+                             (org-bullets-mode)
+                             (spacemacs/toggle-vi-tilde-fringe-off)
+                             (spacemacs/toogle-line-numbers-off)
+                             ))
+
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
   ;;(setq org-latex-pdf-process (quote ("texi2dvi --pdf --clean --verbose --batch %f" "bibtex %b" "texi2dvi --pdf --clean --verbose --batch %f" "texi2dvi --pdf --clean --verbose --batch %f")))
