@@ -190,4 +190,5 @@ mode "$toggle_gaps" {
     bindsym Escape mode "default"
 }
 
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 

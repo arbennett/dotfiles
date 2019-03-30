@@ -41,10 +41,11 @@ values."
      emacs-lisp
      git
      bibtex
+     tabbar
      (org :variables
           org-enable-reveal-js-support t)
      syntax-checking
-     ;;themes-megapack
+     themes-megapack
      ;;spacemacs-layouts
      (colors :variables colors-enable-nyan-cat-progress-bar t)
      )
@@ -53,7 +54,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                        base16-theme)
+                                        olivetti)
+   ;;                                   base16-theme)
    ;;                                   majapahit-theme
    ;;                                   gruvbox-theme)
    ;; A list of packages that cannot be updated.
@@ -130,10 +132,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   ;;dotspacemacs-themes '(
-   ;;                      gruvbox-dark-medium
-   ;;                      majapahit-light
-   ;;                      )
+   dotspacemacs-themes '(
+                         solarized-dark
+                         solarized-light
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -317,10 +319,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; org-mode configuration
-  (defvar base16-theme-256-color-source 'base16-shell)
-  (add-hook 'after-init-hook (lambda () (load-theme (string-trim (f-read-text "~/.config/base16-shell/current_theme")) t)))
+  ;;(defvar base16-theme-256-color-source 'base16-shell)
+  ;;(add-hook 'after-init-hook (lambda () (load-theme (string-trim (f-read-text "~/.config/base16-shell/current_theme")) t)))
   (setq base16-distinct-fringe-backgeround nil)
-  (setq base16-highlight-mode-line 'contrast)
+  ;;(setq base16-highlight-mode-line 'contrast)
   (setq org-directory "~/org-mode")
   (setq org-mobile-inbox-for-pull (concat org-directory "/flagged.org"))
   (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
@@ -345,9 +347,33 @@ you should place your code here."
   (setq org-link-frame-setup '((file . find-file)))
   (add-hook 'org-mode-hook 'update-latex-scale)
   (setq org-agenda-files '("~/org-mode"))
+  (setq org-archive-location "~/org-mode/archive.org::")
   (spacemacs/set-leader-keys
     "w/"  'split-window-right-and-focus
     "w-"  'split-window-below-and-focus)
+  (add-hook 'org-mode-hook (lambda ()
+                              (interactive)
+                              (message "Olivetti text-mode-hook")
+                              (olivetti-mode 1)
+                              (olivetti-set-width 91)
+                              ;;(hidden-mode-line-mode)
+                              (org-bullets-mode)
+                              (spacemacs/toggle-vi-tilde-fringe-off)
+                              (spacemacs/toogle-line-numbers-off)
+                              ))
+  (add-hook 'tex-mode-hook (lambda ()
+                             (interactive)
+                             (message "Olivetti text-mode-hook")
+                             (olivetti-mode 1)
+                             (olivetti-set-width 91)
+                             ;;(hidden-mode-line-mode)
+                             (org-bullets-mode)
+                             (spacemacs/toggle-vi-tilde-fringe-off)
+                             (spacemacs/toogle-line-numbers-off)
+                             ))
+
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
   ;;(setq org-latex-pdf-process (quote ("texi2dvi --pdf --clean --verbose --batch %f" "bibtex %b" "texi2dvi --pdf --clean --verbose --batch %f" "texi2dvi --pdf --clean --verbose --batch %f")))
   )
 
@@ -400,7 +426,7 @@ you should place your code here."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (spinner pdf-tools tablist org-category-capture org-mime helm-bibtex parsebib ghub let-alist biblio biblio-core web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode memoize majapahit-theme base16-theme org-ref key-chord ivy helm helm-core avy projectile all-the-icons-dired spaceline-all-the-icons doom-themes zerodark-theme all-the-icons font-lock+ zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme web-mode tagedit tabbar smeargle slim-mode scss-mode sass-mode rainbow-mode rainbow-identifiers pug-mode ox-reveal ox-gfm orgit org-projectile org-present org-pomodoro alert log4e gntp org-download mmm-mode markdown-toc markdown-mode magit-gitflow less-css-mode htmlize helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-ycmd flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor emmet-mode company-ycmd ycmd request-deferred deferred company-web web-completion-data company-statistics company-anaconda company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (white-sand-theme rebecca-theme exotica-theme olivetti spinner pdf-tools tablist org-category-capture org-mime helm-bibtex parsebib ghub let-alist biblio biblio-core web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode memoize majapahit-theme base16-theme org-ref key-chord ivy helm helm-core avy projectile all-the-icons-dired spaceline-all-the-icons doom-themes zerodark-theme all-the-icons font-lock+ zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme web-mode tagedit tabbar smeargle slim-mode scss-mode sass-mode rainbow-mode rainbow-identifiers pug-mode ox-reveal ox-gfm orgit org-projectile org-present org-pomodoro alert log4e gntp org-download mmm-mode markdown-toc markdown-mode magit-gitflow less-css-mode htmlize helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-ycmd flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor emmet-mode company-ycmd ycmd request-deferred deferred company-web web-completion-data company-statistics company-anaconda company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(pos-tip-foreground-color "#586e75")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(tabbar-separator (quote (0.5)))
@@ -439,11 +465,4 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((((class color) (min-colors 89)) (:bold t :foreground "#5fafd7"))))
- '(org-level-2 ((((class color) (min-colors 89)) (:bold t :foreground "#5fd700"))))
- '(org-level-3 ((((class color) (min-colors 89)) (:bold t :foreground "#ff8700"))))
- '(org-level-4 ((((class color) (min-colors 89)) (:bold t :foreground "#00d7af"))))
- '(org-level-5 ((((class color) (min-colors 89)) (:bold t :foreground "#cc0000"))))
- '(org-level-6 ((((class color) (min-colors 89)) (:bold t :foreground "#b218b2"))))
- '(org-level-7 ((((class color) (min-colors 89)) (:bold t :foreground "#ff4ea3"))))
- '(org-level-8 ((((class color) (min-colors 89)) (:bold t :foreground "#ffd700")))))
+ )
