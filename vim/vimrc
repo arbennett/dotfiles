@@ -7,7 +7,7 @@ filetype off                    "required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'gmarik/vundle'
-    Plugin 'w0rp/ale'
+    "Plugin 'w0rp/ale'
     "Plugin 'Valloric/YouCompleteMe'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'vim-airline/vim-airline'
@@ -18,7 +18,7 @@ call vundle#begin()
 	Plugin 'NLKNguyen/papercolor-theme'
     Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'JuliaLang/julia-vim'
-    Plugin 'vim-python/python-syntax'
+    "Plugin 'vim-python/python-syntax'
     Plugin 'python-mode/python-mode'
     Plugin 'numirias/semshi'
     Plugin 'tpope/vim-commentary'
@@ -26,20 +26,21 @@ call vundle#begin()
     Plugin 'luochen1990/rainbow'
     Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 	Plugin 'chriskempson/base16-vim'
+    Plugin 'neoclide/coc.nvim'
     "Plugin 'edkolev/tmuxline.vim'
-    Plugin 'Shougo/deoplete.nvim'
-    Plugin 'zchee/deoplete-jedi'
+    "Plugin 'Shougo/deoplete.nvim'
+    "Plugin 'zchee/deoplete-jedi'
     "Plugin 'roxma/nvim-yarp'
     "Plugin 'roxma/vim-hug-neovim-rpc'
     "Plugin 'terryma/vim-multiple-cursors'
 call vundle#end()
 
-" Syntax checkers
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8'],
-\}
-let g:ale_lint_delay = 500
+"" Syntax checkers
+"let g:ale_linters = {
+"\   'javascript': ['eslint'],
+"\   'python': ['flake8'],
+"\}
+"let g:ale_lint_delay = 500
 
 "----------------------------------------------------------
 " General settings
@@ -161,9 +162,7 @@ function MyCustomHighlights()
     hi semshiFree            ctermfg=17
     hi semshiUnresolved      ctermfg=0 ctermbg=4  cterm=underline
     hi semshiSelected        ctermfg=8  ctermbg=12
-
     hi semshiSelf            ctermfg=15
-
     hi semshiErrorSign       ctermfg=231 ctermbg=160
     hi semshiErrorChar       ctermfg=231 ctermbg=160
 endfunction
