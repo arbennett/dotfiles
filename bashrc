@@ -6,7 +6,7 @@ set -o vi
 
 alias ls='ls --color=auto'
 alias vim='nvim'
-alias la='ls -la --color=auto --block-size=MB'
+alias la='ls -lah --color=auto'
 alias watchpdf='latexmk -pdf -pvc'
 
 reflow() {
