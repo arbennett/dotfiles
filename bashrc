@@ -5,8 +5,13 @@
 set -o vi
 alias ls='ls --color=auto'
 alias vim='nvim'
-alias la='ls -la --color=auto --block-size=MB'
+alias la='ls -lah --color=auto'
 alias watchpdf='latexmk -pdf -pvc'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+
 
 reflow() {
     DIR=$(basename $(pwd))
@@ -26,7 +31,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 
-PS1=" (\$(check_conda_env)) \[\e[31m\]\W ❱\[\e[32m\]❱\[\e[33m\]❱\[\e(B\]\[\e[m\] "
+PS1=" (\$(check_conda_env)) \[\e[31m\]\W ❱\[\e[32m\]❱\[\e[33m\]❱\[\e(B\]\[\e[m\] \e[0m"
 export EDITOR="vim"
 export TERM=screen-256color
 export NCARG_ROOT="/opt/ncl"
@@ -73,4 +78,7 @@ if [ -f "$HOME/.cheyennerc" ]; then
 	source $HOME/.cheyennerc
 fi
 
+if [ -f "$HOME/.windowsrc" ]; then
+	source $HOME/.windowsrc
+fi
 
