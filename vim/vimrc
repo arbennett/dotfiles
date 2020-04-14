@@ -7,19 +7,15 @@ filetype off                    "required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'gmarik/vundle'
-    "Plugin 'w0rp/ale'
-    "Plugin 'Valloric/YouCompleteMe'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'vim-airline/vim-airline'
     Plugin 'walm/jshint.vim'
-    Plugin 'morhetz/gruvbox'
-    Plugin 'romainl/Apprentice'
-	Plugin 'rakr/vim-one'
-	Plugin 'NLKNguyen/papercolor-theme'
+    "Plugin 'romainl/Apprentice'
     Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'JuliaLang/julia-vim'
+    "Plugin 'tpope/vim-vinegar'
     "Plugin 'vim-python/python-syntax'
-    Plugin 'python-mode/python-mode'
+    "Plugin 'python-mode/python-mode'
     Plugin 'numirias/semshi'
     Plugin 'tpope/vim-commentary'
 	Plugin 'tpope/vim-fugitive'
@@ -27,29 +23,16 @@ call vundle#begin()
     Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 	Plugin 'chriskempson/base16-vim'
     Plugin 'neoclide/coc.nvim'
+    "Plugin 'Vimjas/vim-python-pep8-indent'
+	Plugin 'junegunn/goyo.vim'
     "Plugin 'edkolev/tmuxline.vim'
-    "Plugin 'Shougo/deoplete.nvim'
-    "Plugin 'zchee/deoplete-jedi'
     "Plugin 'roxma/nvim-yarp'
     "Plugin 'roxma/vim-hug-neovim-rpc'
-    "Plugin 'terryma/vim-multiple-cursors'
 call vundle#end()
-
-"" Syntax checkers
-"let g:ale_linters = {
-"\   'javascript': ['eslint'],
-"\   'python': ['flake8'],
-"\}
-"let g:ale_lint_delay = 500
 
 "----------------------------------------------------------
 " General settings
 "----------------------------------------------------------
-"colorscheme gruvbox
-"set background=dark    " Setting dark mode
-"hi! Normal ctermbg=#FFFFFF guibg=#FFFFFF
-"hi! NonText ctermbg=NONE guibg=#FFFFFF
-
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -65,7 +48,7 @@ syntax enable                   " syntax highlighting
 set nu                          " show line numbers set expandtab
 set ic                          " Ignore Case during searches
 set ruler                       " show the cursor position all the time
-set tw=120						" auto wrap at a certain point
+set textwidth=0 wrapmargin=0
 set mouse=a						" Use the mouse
 set showcmd                     " display incomplete commands
 set hlsearch                    " highlight search terms
@@ -76,6 +59,8 @@ set tabstop=4                   " insert 4 spaces whenever the tab key is presse
 set cursorline					" show teh cursorline
 set history=50                  " keep 50 lines of command line history
 set shiftwidth=4                " set indentation to 4 spaces
+set softtabstop=4               " asdf
+set tabstop=4
 set expandtab                   " insert spaces when tab key is pressed
 set relativenumber 				" initialize with relative numbers
 set encoding=utf-8              " allow for more symbols
@@ -91,11 +76,14 @@ set backspace=indent,eol,start  " allow backspacing over everything in insert mo
 set wildmode=longest,list       " Pressing <Tab> shows suggestions similar to pressing <Tab> in bash
 set wildmenu                    " show menu for tab completion
 set path+=**                    " basic fuzzy file finding
-set scrolloff=8                 " scroll before reaching edge
+set scrolloff=6                 " scroll before reaching edge
 set noshowmode                  " self explanatory
 set foldmethod=indent
 set foldlevel=20
 set lazyredraw
+set hidden
+set updatetime=300
+set linebreak
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 hi clear LineNr
@@ -106,12 +94,20 @@ let g:rainbow_active = 1
 
 "Activate Moustache Abreviations
 let g:mustache_abbreviations = 1
+let g:python3_host_prog = "/pool0/data/andrbenn/.conda/all/bin/python"
 
 "----------------------------------------------------------
 " netrw configuration
 "----------------------------------------------------------
 let g:netrw_banner=0
 let g:netrw_liststyle=3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"    autocmd!
+"    autocmd VimEnter * :Vexplore
+"augroup END
 
 "----------------------------------------------------------
 " Keybindings
@@ -130,6 +126,7 @@ nnoremap <silent> <Leader>H :vertical resize+3<cr>
 nnoremap <silent> <Leader>bd : bd<cr>
 nnoremap <silent> <Leader>bn : bnext<cr>
 nnoremap <silent> <Leader>bp : bprevious<cr>
+nnoremap <silent> <Leader>ex : Vex<cr>
 
 " Mappings to traverse buffer list
 nnoremap <silent> [b :bprevious<CR>
@@ -137,6 +134,10 @@ nnoremap <silent> ]b :bnext<CR>
 
 "Root permission on a file inside VIM
 cmap w!! w !sudo tee >/dev/null %
+
+" Scrolling through completions
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "----------------------------------------------------------
 " VIM airline config
@@ -146,6 +147,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='one'    " Self explanatory
 "let g:airline_theme='one'    " Self explanatory
+"let g:pymode_lint = 0
 
 
 "----------------------------------------------------------
@@ -160,10 +162,10 @@ function MyCustomHighlights()
     hi semshiGlobal          ctermfg=3
     hi semshiImported        ctermfg=4  cterm=bold
     hi semshiFree            ctermfg=17
-    hi semshiUnresolved      ctermfg=0 ctermbg=4  cterm=underline
+    hi semshiUnresolved      ctermfg=4 ctermbg=14  cterm=underline
     hi semshiSelected        ctermfg=8  ctermbg=12
     hi semshiSelf            ctermfg=15
-    hi semshiErrorSign       ctermfg=231 ctermbg=160
+    hi semshiErrorSign       ctermfg=7 ctermbg=160
     hi semshiErrorChar       ctermfg=231 ctermbg=160
 endfunction
 autocmd FileType python call MyCustomHighlights()
